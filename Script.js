@@ -39,6 +39,50 @@ document.addEventListener('keydown', handleKeyDown);
 document.addEventListener('keyup', handleKeyUp);
 
 
+let typedKeys = "";
+
+document.addEventListener("keydown", function (e) {
+    // Ignore non-character keys like Shift, Ctrl, etc.
+    if (e.key.length === 1) {
+        typedKeys += e.key.toLowerCase();
+
+        // Limit the buffer to the last 10 characters
+        if (typedKeys.length > 10) {
+            typedKeys = typedKeys.slice(-10);
+        }
+
+        if (typedKeys.includes("shilla")) {
+            showLoserMessage();
+        }
+    }
+});
+
+function showLoserMessage() {
+    const loserDiv = document.createElement("div");
+    loserDiv.textContent = "LOSER 😈";
+    loserDiv.style.position = "fixed";
+    loserDiv.style.top = "50%";
+    loserDiv.style.left = "50%";
+    loserDiv.style.transform = "translate(-50%, -50%)";
+    loserDiv.style.fontSize = "60px";
+    loserDiv.style.fontWeight = "bold";
+    loserDiv.style.color = "red";
+    loserDiv.style.zIndex = "9999";
+    loserDiv.style.background = "black";
+    loserDiv.style.padding = "20px 40px";
+    loserDiv.style.borderRadius = "20px";
+    loserDiv.style.boxShadow = "0 0 20px red";
+    document.body.appendChild(loserDiv);
+
+    // Remove it after 2.5 seconds
+    setTimeout(() => {
+        loserDiv.remove();
+    }, 2500);
+}
+
+
+
+
 //pause or resume
 document.addEventListener('keydown', function(e) {
     if (e.code === 'Space') {
