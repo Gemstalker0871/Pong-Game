@@ -59,7 +59,6 @@ document.addEventListener("keydown", function (e) {
 
 function showLoserMessage() {
     const loserDiv = document.createElement("div");
-    loserDiv.textContent = "LOSER 😈";
     loserDiv.style.position = "fixed";
     loserDiv.style.top = "50%";
     loserDiv.style.left = "50%";
@@ -72,6 +71,23 @@ function showLoserMessage() {
     loserDiv.style.padding = "20px 40px";
     loserDiv.style.borderRadius = "20px";
     loserDiv.style.boxShadow = "0 0 20px red";
+    loserDiv.style.display = "flex";
+    loserDiv.style.alignItems = "center";
+    loserDiv.style.gap = "20px";
+
+    // Text
+    const text = document.createElement("span");
+    text.textContent = "LOSER";
+
+    // Image
+    const img = document.createElement("img");
+    img.src = "Assets/IMG_20241104_121223929_HDR.jpg";  // Replace with your image path
+    img.alt = "Loser icon";
+    img.style.width = "60px";
+    img.style.height = "60px";
+
+    loserDiv.appendChild(text);
+    loserDiv.appendChild(img);
     document.body.appendChild(loserDiv);
 
     // Remove it after 2.5 seconds
@@ -79,7 +95,6 @@ function showLoserMessage() {
         loserDiv.remove();
     }, 2500);
 }
-
 
 
 
