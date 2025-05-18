@@ -37,6 +37,19 @@ document.addEventListener('keydown', startGame)     //dont use () cause that cal
 document.addEventListener('keydown', handleKeyDown);
 document.addEventListener('keyup', handleKeyUp);
 
+
+//pause or resume
+document.addEventListener('keydown', function(e) {
+    if (e.code === 'Space') {
+        if (!gameRunning) {
+            startGame();
+        } else {
+            gameRunning = false;
+        }
+    }
+});
+
+
 //Start Game
 function startGame(){
     gameRunning = true;
@@ -139,6 +152,7 @@ function moveBall(){
 
     if(ballX <= paddle1.clientWidth && ballY >= paddle1Y && ballY <= paddle1Y + paddle1.clientHeight){
     ballSpeedX = -ballSpeedX;
+    increaseBallSpeed();
     playSound(paddleSound);
     }
 
@@ -146,6 +160,7 @@ function moveBall(){
 
     if(ballX >= gameWidth - paddle2.clientWidth - ball.clientWidth && ballY >= paddle2Y && ballY <= paddle2Y + paddle2.clientHeight){
         ballSpeedX = -ballSpeedX;
+        increaseBallSpeed();
         playSound(paddleSound);
     }
 
@@ -197,4 +212,11 @@ function pauseGame(){
 function playSound(sound){
     sound.currentTime = 0;
     sound.play();
+}
+
+
+function increaseBallSpeed() {
+    const speedFactor = 1.05;
+    ballSpeedX *= speedFactor;
+    ballSpeedY *= speedFactor;
 }
