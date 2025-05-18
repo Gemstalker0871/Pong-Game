@@ -30,6 +30,7 @@ const paddleDeceleration = 1;
 const maxPaddleSpeed = 5;
 const gameHeight = 400;
 const gameWidth = 600;
+const paddleCollisionBuffer = 10;
 
 
 
@@ -148,21 +149,25 @@ function moveBall(){
         playSound(wallSound);
     }
 
-//paddle 1 collision
+// Paddle 1 Collision
+if (
+  ballX <= paddle1.clientWidth &&
+  ballY + ball.clientHeight >= paddle1Y - paddleCollisionBuffer &&
+  ballY <= paddle1Y + paddle1.clientHeight + paddleCollisionBuffer
+) {
+  ballSpeedX = -ballSpeedX;
+  playSound(paddleSound);
+}
 
-    if(ballX <= paddle1.clientWidth && ballY >= paddle1Y && ballY <= paddle1Y + paddle1.clientHeight){
-    ballSpeedX = -ballSpeedX;
-    increaseBallSpeed();
-    playSound(paddleSound);
-    }
-
-//paddle 2 collision
-
-    if(ballX >= gameWidth - paddle2.clientWidth - ball.clientWidth && ballY >= paddle2Y && ballY <= paddle2Y + paddle2.clientHeight){
-        ballSpeedX = -ballSpeedX;
-        increaseBallSpeed();
-        playSound(paddleSound);
-    }
+// Paddle 2 Collision
+if (
+  ballX + ball.clientWidth >= gameWidth - paddle2.clientWidth &&
+  ballY + ball.clientHeight >= paddle2Y - paddleCollisionBuffer &&
+  ballY <= paddle2Y + paddle2.clientHeight + paddleCollisionBuffer
+) {
+  ballSpeedX = -ballSpeedX;
+  playSound(paddleSound);
+}
 
 //handle Out of game Collision
 
