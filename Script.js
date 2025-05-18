@@ -156,6 +156,7 @@ if (
   ballY <= paddle1Y + paddle1.clientHeight + paddleCollisionBuffer
 ) {
   ballSpeedX = -ballSpeedX;
+  increaseBallSpeed();
   playSound(paddleSound);
 }
 
@@ -166,6 +167,7 @@ if (
   ballY <= paddle2Y + paddle2.clientHeight + paddleCollisionBuffer
 ) {
   ballSpeedX = -ballSpeedX;
+  increaseBallSpeed();
   playSound(paddleSound);
 }
 
